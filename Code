@@ -1,0 +1,97 @@
+#Importing the necessary libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+#Font dictionaries 
+f3={"Family":"serif"}
+rep='y'
+df=pd.read_csv("/content/drive/MyDrive/The project/IP/attrition-dataset.csv")
+print('Conversion of CSV file to DataFrame')
+data = pd.DataFrame(df)
+while(rep=='y'):
+  print("1-Information about the DataFrame")
+  print("2-Displaying dismissed Employees")
+  print("3-Displaying non-dismissed Employees")
+  print("4-Category of dismissed Employees of the basis of Age")
+  print("5-Attrition based on Education Field")
+  print("6-Attrition based on Work Life Balance")
+  print("7-Attrition based on Environment satisfaction")
+  print("8-Attrition based on Performance rating")
+  print("9-Attrition based on Job Satisfaction")
+  print("10- Exit")
+  ch=int(input("Enter choice (1-10) : "))
+  if(ch==1):
+    print("Information about the DataFrame:")
+    i=data.info()
+    print(i)
+  elif(ch==2):
+    print("Analysis of dismissed employees")
+    data_attrition_yes = data[data['Attrition'] == 'Yes']
+    print(data_attrition_yes)
+  elif(ch==3):
+    print("Analysis ofundismissed employees")
+    data_attrition_no = data[data['Attrition'] == 'No']
+    print(data_attrition_no)
+  elif(ch==4):
+    print("Attition on the basis of Age")
+    data_attrition_yes = data[data['Attrition'] == 'Yes']
+    data_age = data_attrition_yes['Age'].value_counts() 
+    print(data_age)
+  elif(ch==5): 
+    print("Education field as a factor in Bar Graph")
+    data_attrition_yes = data[data['Attrition'] == 'Yes']
+    data_Education = data_attrition_yes['EducationField'].value_counts()
+    data_Education = data_attrition_yes.groupby('Age')['EducationField'].value_counts().unstack().plot(kind="bar",color=["Cyan","purple","brown","Crimson","grey","k"],figsize=(20, 16))
+    plt.grid(color ='grey',linestyle ='-.', linewidth = 0.5,)
+    plt.legend(loc=0)
+    plt.title("Attrition based on Education Field as a factor",fontsize=15,fontdict=f3,pad=10)
+    plt.xlabel("Age",fontdict=f3,labelpad=5,fontsize=10)
+    plt.ylabel("No of Employees",fontdict=f3,labelpad=5,fontsize=10)
+    plt.show()
+  elif(ch==6):
+    print("WorkLifeBalance as a factor in line graph")
+    data_attrition_yes = data[data['Attrition'] == 'Yes']
+data_WorkLifeBalance=data_attrition_yes['WorkLifeBalance'].value_counts()
+    data_WorkLifeBalance = data_attrition_yes.groupby('Age')['WorkLifeBalance'].value_counts().unstack().plot(figsize=(20, 16))
+    plt.grid(color ='grey',linestyle ='-.', linewidth = 0.5,)
+    plt.legend(loc=0)
+    plt.title("Attrition based on Work Life Balance as a factor",fontsize=15,fontdict=f3,pad=10)
+    plt.xlabel("Age",fontdict=f3,labelpad=5,fontsize=10)
+    plt.ylabel("No of Employees",fontdict=f3,labelpad=5,fontsize=10)
+    plt.show()
+  elif(ch==7):
+    print("Environment satisfaction as a factor in bar graph")
+    data_attrition_yes = data[data['Attrition'] == 'Yes']
+    data_EnvironmentSatisfaction =data_attrition_yes['EnvironmentSatisfaction'].value_counts()
+    data_EnvironmentSatisfaction = data_attrition_yes.groupby('Age')['EnvironmentSatisfaction'].value_counts().unstack().plot(kind="bar",color=["purple","brown","Crimson","k"],figsize=(20, 16))
+    plt.grid(color ='grey',linestyle ='-.', linewidth = 0.5,)
+    plt.legend(loc=0)
+    plt.title("Attrition based on Environment Satisfaction as a factor",fontsize=15,fontdict=f3,pad=10)
+    plt.xlabel("Age",fontdict=f3,labelpad=5,fontsize=10)
+    plt.ylabel("No of Employees",fontdict=f3,labelpad=5,fontsize=10)
+    plt.show()
+  elif(ch==8):
+    print("Performance rating as a factor in line graph")
+    data_attrition_yes = data[data['Attrition'] == 'Yes']
+data_PerformanceRating=data_attrition_yes['PerformanceRating'].value_counts()
+    data_PerformanceRating = data_attrition_yes.groupby('Age')['PerformanceRating'].value_counts().unstack().plot(figsize=(20, 16))
+    plt.grid(color ='grey',linestyle ='-.', linewidth = 0.5,)
+    plt.legend(loc=0)
+    plt.title("Attrition based on Performance Rating as a factor",fontsize=15,fontdict=f3,pad=10)
+    plt.xlabel("Age",fontdict=f3,labelpad=5,fontsize=10)
+    plt.ylabel("No of Employees",fontdict=f3,labelpad=5,fontsize=10)
+    plt.show()
+  elif(ch==9):
+    print("JobSatisfaction as a factor in histogram")
+data_JobSatisfaction=data_attrition_yes['JobSatisfaction'].value_counts()
+    data_JobSatisfaction = data_attrition_yes.groupby('Age')['JobSatisfaction'].value_counts().unstack().plot(kind="hist",color=["purple","brown","Crimson","k"],figsize=(20, 16))
+    plt.grid(color ='grey',linestyle ='-.', linewidth = 0.5,)
+    plt.legend(loc=0)
+    plt.title("Attrition based on Job Satisfaction as a factor",fontsize=15,fontdict=f3,pad=10)
+    plt.xlabel("",fontdict=f3,labelpad=5,fontsize=10)
+    plt.ylabel("No of Employees",fontdict=f3,labelpad=5,fontsize=10)
+    plt.show()
+  else:
+    print("Thank you !!")
+    break
