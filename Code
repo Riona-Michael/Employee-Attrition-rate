@@ -6,7 +6,7 @@ import seaborn as sns
 #Font dictionaries 
 f3={"Family":"serif"}
 rep='y'
-df=pd.read_csv("/content/drive/MyDrive/The project/IP/attrition-dataset.csv")
+df=pd.read_csv(".csv") #Insert dataset file path
 print('Conversion of CSV file to DataFrame')
 data = pd.DataFrame(df)
 while(rep=='y'):
